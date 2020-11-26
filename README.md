@@ -1,8 +1,19 @@
-<h2 id="First">Data prepare</h2>
+# HW2_Report
+Code for digits dection
+---Street View House Numbers
+- [Data Prepare](#First)
+- [Data Augumentation](#Second)
+- [Data set](#Third)
+- [Model](#Forth)
+- [Train](#Fifth)
+- [Predict](#Sixth)
+- [Submit](#Seventh)
+
+<h2 id="First">Data Prepare</h2>
 <pre><code>
 import h5py
-
 class DigitStructFile:
+
     def __init__(self, inf):
         self.inf = h5py.File(inf, 'r')
         self.digitStructName = self.inf['digitStruct']['name']
@@ -18,7 +29,6 @@ class DigitStructFile:
             attr = [attr.value[0][0]]
         return attr
 
-
     def getBbox(self,n):
         bbox = {}
         bb = self.digitStructBbox[n].item()
@@ -33,8 +43,7 @@ class DigitStructFile:
         s = self.getBbox(n)
         s['name']=self.getName(n)
         return s
-
-    
+   
     def getAllDigitStructure(self):
         return [self.getDigitStructure(i) for i in range(len(self.digitStructName))]
 
@@ -58,3 +67,15 @@ class DigitStructFile:
             result.append(item)
         return result
 </code></pre>
+
+<h2 id="Second">Data Augumentation</h2>
+
+<h2 id="Third">Data set</h2>
+
+<h2 id="Forth">Model</h2>
+
+<h2 id="Fifth">Train</h2>
+
+<h2 id="Sixth">Predict</h2>
+
+<h2 id="Seventh">Submit</h2>
