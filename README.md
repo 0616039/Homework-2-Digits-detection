@@ -30,11 +30,59 @@ for i in range(len(imgs)):
 file.close()
 </code></pre>
 
+process and covert data to yolo format
+<pre><code>""" Process """
+for txt_name in txt_name_list:
+    
+    """ Open input text files """
+    txt_path = temp + txt_name
+    print("Input:" + txt_path)
+    txt_file = open(txt_path, "r")
+    lines = txt_file.read().split('\n')
+    
+    """ Open output text files """
+    txt_outpath = out + txt_name
+    print("Output:" + txt_outpath)
+    txt_outfile = open(txt_outpath, "w")
+    
+    
+    """ Convert the data to YOLO format """
+    ct = 0
+    for line in lines:
+        if(len(line) >= 2):
+            ct = ct + 1
+            print(line + "\n")
+            elems = line.split(' ')
+            print(elems)
+            xmin = elems[0]
+            xmax = elems[2]
+            ymin = elems[1]
+            ymax = elems[3]
+            cls = elems[4]
+            
+            img_path = str('train/%s.png'%(os.path.splitext(txt_name)[0]))
+            
+            im=Image.open(img_path)
+            w= int(im.size[0])
+            h= int(im.size[1])
+            
+            print('W H = ', w, h)
+            b = (float(xmin), float(xmax), float(ymin), float(ymax))
+            print('B = ', b)
+            bb = convert((w,h), b)
+            print(bb)
+            print("CLS = ", cls)
+            txt_outfile.write(str(cls) + " " + " ".join([str(a) for a in bb]) + '\n')
+</code></pre>
+
 
 <h2 id="Forth">Model</h2>
 
 
-I use Yolov3 model
+I use Yolov3 darknet model
+
+read the weight and cfg from darknet
+<pre><code>net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)</code></pre>
 <h2 id="Fifth">Train</h2>
 
 I trained YoloV3 from: https://github.com/AlexeyAB/darknet
