@@ -42,8 +42,9 @@ I trained YoloV3 from: https://github.com/AlexeyAB/darknet
 I use the anchor values:  
 29,67, 37,112, 57,112, 46,166, 64,150, 66,195, 85,166, 90,205, 121,204
 
-The class in obj.names is from 0 to 10 (since number 0 = 10) not 1 to 10 because yolo was only able to train from index 0. So, the class would be 11 not 10.
+The class in obj.names is from 0 to 10 (since number 0 = 10) not 1 to 10 because yolo was only able to train from index 0. So, the class would be 11 not 10.  
 
+In this part, we used pretrained weight darknet53.conv.74 to get better result. For the model architecture, we used YoloV3.
 <h2 id="Sixth">Speed Benchmark</h2> 
 
 We tried to test the weight on Google Colab and we got the result 521 ms per loop.
